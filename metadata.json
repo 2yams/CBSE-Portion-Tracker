@@ -1,0 +1,6 @@
+{
+  "name": "CBSE Portion Tracker",
+  "description": "Super minimal, offline-first syllabus and portion tracker for CBSE Grades 9-12 with completion notes, analytics, and export options.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
