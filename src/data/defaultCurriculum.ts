@@ -109,12 +109,27 @@ export const DEFAULT_GRADES: Grade[] = [
         name: 'Information Tech (402)',
         code: '402',
         chapters: [
-          { id: 'c10-it-1', name: 'Digital Documentation (Advanced)', unitName: 'Subject Specific Skills' },
-          { id: 'c10-it-2', name: 'Electronic Spreadsheet (Advanced)', unitName: 'Subject Specific Skills' },
-          { id: 'c10-it-3', name: 'Database Management System (DBMS)', unitName: 'Subject Specific Skills' },
-          { id: 'c10-it-4', name: 'Web Applications and Security', unitName: 'Subject Specific Skills' },
-          { id: 'c10-it-5', name: 'Communication & Self-Management Skills', unitName: 'Employability Skills' },
-          { id: 'c10-it-6', name: 'ICT Skills & Green Skills', unitName: 'Employability Skills' },
+          // Part A: Employability Skills (10 Marks)
+          { id: 'c10-it-emp-1', name: 'Unit 1: Communication Skills-II', unitName: 'Part A: Employability Skills', weightageEstimate: 'Part A (10 Marks Total)' },
+          { id: 'c10-it-emp-2', name: 'Unit 2: Self-Management Skills-II', unitName: 'Part A: Employability Skills', weightageEstimate: 'Part A (10 Marks Total)' },
+          { id: 'c10-it-emp-3', name: 'Unit 3: Information and Communication Technology (ICT) Skills-II', unitName: 'Part A: Employability Skills', weightageEstimate: 'Part A (10 Marks Total)' },
+          { id: 'c10-it-emp-4', name: 'Unit 4: Entrepreneurial Skills-II', unitName: 'Part A: Employability Skills', weightageEstimate: 'Part A (10 Marks Total)' },
+          { id: 'c10-it-emp-5', name: 'Unit 5: Green Skills-II', unitName: 'Part A: Employability Skills', weightageEstimate: 'Part A (10 Marks Total)' },
+
+          // Part B: Subject-Specific Skills (40 Marks)
+          // Unit 1: Digital Documentation (Advanced) (Using LibreOffice Writer)
+          { id: 'c10-it-sub-1', name: 'Chapter 1: Introduction to Styles', unitName: 'Unit 1: Digital Documentation (Advanced)', weightageEstimate: '8 Marks' },
+          { id: 'c10-it-sub-2', name: 'Chapter 2: Working with Images', unitName: 'Unit 1: Digital Documentation (Advanced)', weightageEstimate: '8 Marks' },
+          { id: 'c10-it-sub-3', name: 'Chapter 3: Advanced Features of Writer (Templates and Mail Merge)', unitName: 'Unit 1: Digital Documentation (Advanced)', weightageEstimate: '8 Marks' },
+
+          // Unit 2: Electronic Spreadsheet (Advanced)
+          { id: 'c10-it-sub-4', name: 'Unit 2: Electronic Spreadsheet (Scenarios, Goal Seek, Macros, Linking & Sharing)', unitName: 'Unit 2: Electronic Spreadsheet (Advanced)', weightageEstimate: '10 Marks' },
+
+          // Unit 3: Database Management System
+          { id: 'c10-it-sub-5', name: 'Unit 3: Database Management System (LibreOffice Base, Tables, Queries, Forms & Reports)', unitName: 'Unit 3: Database Management System', weightageEstimate: '12 Marks' },
+
+          // Unit 4: Maintain Healthy, Safe and Secure Working Environment
+          { id: 'c10-it-sub-6', name: 'Unit 4: Maintain Healthy, Safe and Secure Working Environment (Health, Safety & Quality Practices)', unitName: 'Unit 4: Workplace Safety & Security', weightageEstimate: '10 Marks' },
         ],
       },
     ],

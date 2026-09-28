@@ -10,6 +10,67 @@ export function getInitialData(): AppData {
     if (raw) {
       const parsed = JSON.parse(raw) as AppData;
       if (parsed && parsed.grades && parsed.progress) {
+        // Ensure new or updated default curriculum chapters (such as Class 10 IT) are merged
+        const updatedGrades = DEFAULT_GRADES.map((defaultGrade) => {
+          const userGrade = parsed.grades.find((g) => g.id === defaultGrade.id);
+          if (!userGrade) return defaultGrade;
+
+          const mergedSubjects = defaultGrade.subjects.map((defaultSub) => {
+            const userSub = userGrade.subjects.find((s) => s.id === defaultSub.id);
+            if (!userSub) return defaultSub;
+
+            // Merge chapters: keep existing progress, ensure new chapters from defaultCurriculum exist
+            const chapterMap = new Map<string, typeof defaultSub.chapters[0]>();
+            defaultSub.chapters.forEach((ch) => chapterMap.set(ch.id, ch));
+            // Keep any custom user-added chapters as well
+            userSub.chapters.forEach((ch) => {
+              if (!chapterMap.has(ch.id)) {
+                chapterMap.set(ch.id, ch);
+              }
+            });
+
+            return {
+              ...userSub,
+              chapters: Array.from(chapterMap.values()),
+            };
+          });
+
+          // Also keep any custom user-added subjects
+          const defaultSubIds = new Set(defaultGrade.subjects.map((s) => s.id));
+          const customSubjects = userGrade.subjects.filter((s) => !defaultSubIds.has(s.id));
+
+          return {
+            ...userGrade,
+            subjects: [...mergedSubjects, ...customSubjects],
+          };
+        });
+
+        // Initialize progress for any newly added chapters if not already existing
+        const now = new Date().toISOString();
+        updatedGrades.forEach((g) => {
+          g.subjects.forEach((s) => {
+            s.chapters.forEach((ch) => {
+              const key = `${g.id}_${s.id}_${ch.id}`;
+              if (!parsed.progress[key]) {
+                parsed.progress[key] = {
+                  chapterId: ch.id,
+                  gradeId: g.id,
+                  subjectId: s.id,
+                  status: 'not_started',
+                  checklist: { ...DEFAULT_CHECKLIST },
+                  notes: '',
+                  difficulty: 3,
+                  confidence: 1,
+                  revisionsCount: 0,
+                  updatedAt: now,
+                };
+              }
+            });
+          });
+        });
+
+        parsed.grades = updatedGrades;
+        saveData(parsed);
         return parsed;
       }
     }
